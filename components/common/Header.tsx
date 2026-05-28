@@ -5,7 +5,7 @@ import Logo from "@/components/common/Logo"
 import { usePathname } from "next/navigation"
 
 const navLinks = [
-    { href: "/summarizer", label: "Summarizer" },
+    { href: "/", label: "Summarizer" },
     { href: "/history", label: "History" },
     { href: "/profile", label: "Profile" },
 ]
@@ -21,7 +21,9 @@ export default function Header() {
             </div>
             <nav className="flex gap-7 list-none">
                 {navLinks.map((link) => {
-                    const isActive = pathname === link.href
+                    const isActive = link.href === "/"
+                        ? pathname === "/" || pathname.startsWith("/results")
+                        : pathname === link.href
                     return (
                         <li key={link.href}>
                             <Link
