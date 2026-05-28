@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Logo from "@/components/common/Logo"
 import { usePathname } from "next/navigation"
+import LogoutButton from "@/components/features/auth/LogoutButton"
 
 const navLinks = [
     { href: "/", label: "Summarizer" },
@@ -38,6 +39,7 @@ export default function Header() {
                     )
                 })}
             </nav>
+            <LogoutButton />
         </header>
     )
 }
