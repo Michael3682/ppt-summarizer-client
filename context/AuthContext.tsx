@@ -69,7 +69,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const userData = response.data.user
         setUser(userData)
         localStorage.setItem("user", JSON.stringify(userData))
-        router.push("/")
+        router.push("/summarizer")
       } else {
         toast.error(response.message || "Login failed")
       }

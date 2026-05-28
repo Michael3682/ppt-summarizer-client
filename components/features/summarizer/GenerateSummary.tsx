@@ -1,0 +1,139 @@
+"use client"
+
+import { toast } from "sonner"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
+import FileUpload from "@/components/features/summarizer/FileUpload"
+import {
+    Field,
+    FieldGroup,
+    FieldLabel,
+    FieldLegend,
+    FieldSet,
+} from "@/components/ui/field"
+import { presentationService, SummaryDetail, ExportFormat } from "@/services/presentation.service"
+
+export default function GenerateSummary() {
+    const [selectedFile, setSelectedFile] = useState<File | null>(null)
+    const [summaryDetail, setSummaryDetail] = useState<SummaryDetail>("MEDIUM")
+    const [exportFormat, setExportFormat] = useState<ExportFormat>("pdf")
+    const [isLoading, setIsLoading] = useState(false)
+    const router = useRouter()
+
+    const handleGenerateSummary = async () => {
+        if (!selectedFile) {
+            toast.error("Please select a PowerPoint file before generating a summary.")
+            return
+        }
+
+        const formData = new FormData()
+        formData.append("file", selectedFile)
+        formData.append("summaryDetail", summaryDetail)
+
+        setIsLoading(true)
+
+        try {
+            const response = await presentationService.uploadPresentation(formData)
+            const presentation = response.data?.presentation
+
+            if (!presentation?.id) {
+                throw new Error("Invalid summary response")
+            }
+
+            localStorage.setItem(
+                `presentation-${presentation.id}`,
+                JSON.stringify(presentation),
+            )
+
+            router.push(`/results/${presentation.id}?format=${exportFormat}`)
+        } catch (error) {
+            console.error(error)
+            toast.error("Unable to generate summary. Please try again.")
+        } finally {
+            setIsLoading(false)
+        }
+    }
+
+    return (
+        <div className="flex flex-col justify-center items-center gap-10 p-15 max-w-5xl mx-auto">
+            <h1 className="font-medium text-xl">Welcome back, User! Ready to condense your presentation deck into key highlights?</h1>
+            <div className="w-full space-y-3">
+                <FileUpload selectedFile={selectedFile} onFileSelect={setSelectedFile} />
+                <p className="text-center text-muted-foreground text-sm">{"(Supports: .pptx)"}</p>
+            </div>
+            <div className="flex flex-col w-full border border-ring bg-sidebar rounded-lg p-7 gap-5">
+                <p className="text-tertiary">AI CONFIGURATIONS:</p>
+                <FieldGroup className="w-full flex-row justify-center">
+                    <FieldSet className="w-full">
+                        <FieldLegend className="w-max">Summary Detail:</FieldLegend>
+                        <FieldGroup className="gap-4 text-muted-foreground">
+                            <Field orientation="horizontal">
+                                <Checkbox
+                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    id="short"
+                                    checked={summaryDetail === "SHORT"}
+                                    onCheckedChange={(value) => value && setSummaryDetail("SHORT")}
+                                />
+                                <FieldLabel htmlFor="short">Short</FieldLabel>
+                            </Field>
+                            <Field orientation="horizontal">
+                                <Checkbox
+                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    id="medium"
+                                    checked={summaryDetail === "MEDIUM"}
+                                    onCheckedChange={(value) => value && setSummaryDetail("MEDIUM")}
+                                />
+                                <FieldLabel htmlFor="medium">Medium</FieldLabel>
+                            </Field>
+                            <Field orientation="horizontal">
+                                <Checkbox
+                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    id="deep_dive"
+                                    checked={summaryDetail === "DEEP_DIVE"}
+                                    onCheckedChange={(value) => value && setSummaryDetail("DEEP_DIVE")}
+                                />
+                                <FieldLabel htmlFor="deep_dive">Deep Dive</FieldLabel>
+                            </Field>
+                        </FieldGroup>
+                    </FieldSet>
+                    <FieldSet className="w-full">
+                        <FieldLegend className="w-max">Export Format:</FieldLegend>
+                        <FieldGroup className="gap-4 text-muted-foreground">
+                            <Field className="w-max" orientation="horizontal">
+                                <Checkbox
+                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    id="docs"
+                                    checked={exportFormat === "docx"}
+                                    onCheckedChange={(value) => value && setExportFormat("docx")}
+                                />
+                                <FieldLabel htmlFor="docs">Word Document {"(.docx)"}</FieldLabel>
+                            </Field>
+                            <Field className="w-max" orientation="horizontal">
+                                <Checkbox
+                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    id="ppt"
+                                    checked={exportFormat === "pdf"}
+                                    onCheckedChange={(value) => value && setExportFormat("pdf")}
+                                />
+                                <FieldLabel htmlFor="ppt">PowerPoint Presentation {"(.pptx)"}</FieldLabel>
+                            </Field>
+                        </FieldGroup>
+                    </FieldSet>
+                </FieldGroup>
+            </div>
+            <Button
+                type="button"
+                disabled={!selectedFile || isLoading}
+                className="text-2xl p-7 bg-tertiary hover:bg-tertiary-foreground text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+                onClick={handleGenerateSummary}
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkle-icon lucide-sparkle">
+                    <path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" />
+                </svg>
+                {isLoading ? "Generating Summary..." : "Generate Summary"}
+            </Button>
+        </div>
+    )
+}
