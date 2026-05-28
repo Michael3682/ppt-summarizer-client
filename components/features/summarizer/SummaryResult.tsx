@@ -203,7 +203,7 @@ export default function SummaryResult() {
                                         className="flex h-full min-h-[190px] flex-col justify-between rounded-[28px] border border-border bg-background p-6"
                                     >
                                         <div>
-                                            <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                                            <p className="text-xs uppercase tracking-[0.3em] text-tertiary-foreground">
                                                 {`0${index + 1}`}
                                             </p>
                                             <p className="mt-3 text-sm leading-7 text-foreground">{item}</p>
@@ -214,7 +214,7 @@ export default function SummaryResult() {
 
                             <div className="rounded-[28px] border border-border bg-muted p-6">
                                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                                    <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground">Full summary</p>
+                                    <p className="text-sm uppercase tracking-[0.2em] text-tertiary">Full summary</p>
                                     <span className="inline-flex rounded-full border border-ring bg-background px-3 py-1 text-xs uppercase text-muted-foreground">
                                         {metadata?.readingTime} read
                                     </span>
@@ -228,23 +228,21 @@ export default function SummaryResult() {
                             <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                                 <Button
                                     type="button"
-                                    variant="default"
                                     size="lg"
-                                    className="w-full sm:w-auto"
+                                    className="w-full cursor-pointer bg-tertiary text-white hover:bg-tertiary-foreground sm:w-auto"
                                     disabled={isDownloading}
                                     onClick={() => handleDownload("pdf")}
                                 >
-                                    Download PDF
+                                    {"[ Download PDF ]"}
                                 </Button>
                                 <Button
                                     type="button"
-                                    variant="secondary"
                                     size="lg"
-                                    className="w-full sm:w-auto"
+                                    className="w-full cursor-pointer bg-transparent border border-tertiary text-primary hover:bg-tertiary hover:text-white sm:w-auto"
                                     disabled={isDownloading}
                                     onClick={() => handleDownload("docx")}
                                 >
-                                    Download DOCX
+                                    {"[ Download DOCX ]"}
                                 </Button>
                             </div>
                             <div className="rounded-3xl bg-background px-4 py-3 text-sm text-muted-foreground">
