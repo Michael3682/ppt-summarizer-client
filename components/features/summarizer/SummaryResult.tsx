@@ -244,7 +244,7 @@ export default function SummaryResult() {
                                     disabled={isDownloading}
                                     onClick={() => handleDownload("docx")}
                                 >
-                                    Download PPTX
+                                    Download DOCX
                                 </Button>
                             </div>
                             <div className="rounded-3xl bg-background px-4 py-3 text-sm text-muted-foreground">
