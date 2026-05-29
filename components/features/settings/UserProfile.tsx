@@ -2,11 +2,12 @@
 
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import type { UserProfileProps } from "@/constants/account.types"
+import { useAuth } from "@/context/AuthContext"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 
-export default function UserProfile({ name, email }: UserProfileProps) {
+export default function UserProfile() {
+  const { user } = useAuth()
   return (
     <Card className="space-y-4">
       <CardHeader>
@@ -17,11 +18,11 @@ export default function UserProfile({ name, email }: UserProfileProps) {
           <div className="grid flex-1 gap-4 sm:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="full-name">Full Name</Label>
-              <Input id="full-name" value={name} disabled />
+              <Input id="full-name" value={user?.name || ""} disabled />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email-address">Email Address</Label>
-              <Input id="email-address" value={email} disabled />
+              <Input id="email-address" value={user?.email || ""} disabled />
             </div>
           </div>
         </div>

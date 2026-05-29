@@ -33,4 +33,9 @@ export const presentationService = {
     })
     return response.data as Blob
   },
+
+  deletePresentation: async (id: string) => {
+    const response = await axiosInstance.delete(`/api/presentations/v1/${id}`)
+    return response.data
+  },
 }

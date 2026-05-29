@@ -18,8 +18,3 @@ export type SettingsFormState = {
   currentPassword: string
   newPassword: string
 }
-
-export type UserProfileProps = {
-  name: string
-  email: string
-}

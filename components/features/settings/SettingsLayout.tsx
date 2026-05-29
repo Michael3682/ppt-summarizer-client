@@ -106,10 +106,7 @@ export default function SettingsLayout() {
 
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
           <div className="space-y-6">
-            <UserProfile
-              name={user.name}
-              email={user.email}
-            />
+            <UserProfile />
             <AccountPreferences
               language={form.language}
               timezone={form.timezone}

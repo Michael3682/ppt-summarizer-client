@@ -4,6 +4,7 @@ import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { useEffect, useMemo, useState } from "react"
 import { useParams, useSearchParams } from "next/navigation"
+import ReactMarkdown from "react-markdown"
 import { presentationService } from "@/services/presentation.service"
 import type { Presentation, ExportFormat } from "@/constants/presentation.types"
 import {
@@ -14,6 +15,36 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+
+const markdownComponents = {
+    p: ({ node, ...props }: any) => (
+        <p className="m-0 text-sm leading-7 text-foreground" {...props} />
+    ),
+    strong: ({ node, ...props }: any) => (
+        <strong className="font-semibold text-foreground" {...props} />
+    ),
+    em: ({ node, ...props }: any) => (
+        <em className="not-italic text-foreground" {...props} />
+    ),
+    ul: ({ node, ...props }: any) => (
+        <ul className="ml-5 list-disc space-y-2 text-sm leading-7 text-foreground" {...props} />
+    ),
+    ol: ({ node, ...props }: any) => (
+        <ol className="ml-5 list-decimal space-y-2 text-sm leading-7 text-foreground" {...props} />
+    ),
+    li: ({ node, ...props }: any) => (
+        <li className="text-sm leading-7 text-foreground" {...props} />
+    ),
+    h1: ({ node, ...props }: any) => (
+        <h1 className="text-2xl font-semibold text-foreground" {...props} />
+    ),
+    h2: ({ node, ...props }: any) => (
+        <h2 className="text-xl font-semibold text-foreground" {...props} />
+    ),
+    h3: ({ node, ...props }: any) => (
+        <h3 className="text-lg font-semibold text-foreground" {...props} />
+    ),
+}
 
 function getSummaryMetadata(summary: string) {
     const words = summary.trim().split(/\s+/).filter(Boolean).length
@@ -207,7 +238,11 @@ export default function SummaryResult() {
                                             <p className="text-xs uppercase tracking-[0.3em] text-tertiary-foreground">
                                                 {`0${index + 1}`}
                                             </p>
-                                            <p className="mt-3 text-sm leading-7 text-foreground">{item}</p>
+                                            <div className="mt-3">
+                                                <ReactMarkdown components={markdownComponents}>
+                                                    {item}
+                                                </ReactMarkdown>
+                                            </div>
                                         </div>
                                     </div>
                                 ))}
@@ -221,7 +256,11 @@ export default function SummaryResult() {
                                     </span>
                                 </div>
                                 <div className="mt-4 max-h-[320px] overflow-y-auto text-sm leading-7 text-foreground">
-                                    <p className="whitespace-pre-line">{presentation.summary}</p>
+                                    <div className="prose prose-invert max-w-none text-foreground">
+                                        <ReactMarkdown components={markdownComponents}>
+                                            {presentation.summary}
+                                        </ReactMarkdown>
+                                    </div>
                                 </div>
                             </div>
                         </CardContent>
