@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { useAuth } from "@/context/AuthContext"
 import FileUpload from "@/components/features/summarizer/FileUpload"
 import { presentationService } from "@/services/presentation.service"
 import type { SummaryDetail, ExportFormat } from "@/constants/presentation.types"
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui/field"
 
 export default function GenerateSummary() {
+    const { user } = useAuth()
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const [summaryDetail, setSummaryDetail] = useState<SummaryDetail>("MEDIUM")
     const [exportFormat, setExportFormat] = useState<ExportFormat>("pdf")
@@ -56,7 +58,7 @@ export default function GenerateSummary() {
 
     return (
         <div className="flex flex-col justify-center items-center gap-10 p-15 max-w-5xl mx-auto">
-            <h1 className="font-medium text-xl">Welcome back, User! Ready to condense your presentation deck into key highlights?</h1>
+            <h1 className="font-medium text-xl">Welcome back, {user?.name}! Ready to condense your presentation deck into key highlights?</h1>
             <div className="w-full space-y-3">
                 <FileUpload selectedFile={selectedFile} onFileSelect={setSelectedFile} />
                 <p className="text-center text-muted-foreground text-sm">{"(Supports: .pptx)"}</p>
