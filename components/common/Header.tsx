@@ -8,7 +8,7 @@ import LogoutButton from "@/components/features/auth/LogoutButton"
 const navLinks = [
     { href: "/", label: "Summarizer" },
     { href: "/history", label: "History" },
-    { href: "/profile", label: "Profile" },
+    { href: "/settings", label: "Settings" },
 ]
 
 export default function Header() {
