@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import FileUpload from "@/components/features/summarizer/FileUpload"
+import { presentationService } from "@/services/presentation.service"
+import type { SummaryDetail, ExportFormat } from "@/constants/presentation.types"
 import {
     Field,
     FieldGroup,
@@ -13,7 +15,6 @@ import {
     FieldLegend,
     FieldSet,
 } from "@/components/ui/field"
-import { presentationService, SummaryDetail, ExportFormat } from "@/services/presentation.service"
 
 export default function GenerateSummary() {
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -35,17 +36,14 @@ export default function GenerateSummary() {
         setIsLoading(true)
 
         try {
-            const response = await presentationService.uploadPresentation(formData)
-            const presentation = response.data?.presentation
+            const result = await presentationService.uploadPresentation(formData)
+            const presentation = result.presentation
 
             if (!presentation?.id) {
                 throw new Error("Invalid summary response")
             }
 
-            localStorage.setItem(
-                `presentation-${presentation.id}`,
-                JSON.stringify(presentation),
-            )
+            localStorage.setItem(`presentation-${presentation.id}`, JSON.stringify(presentation))
 
             router.push(`/results/${presentation.id}?format=${exportFormat}`)
         } catch (error) {

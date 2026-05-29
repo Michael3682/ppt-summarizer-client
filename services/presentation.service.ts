@@ -1,57 +1,33 @@
 import axiosInstance from "@/lib/axios"
-
-export type SummaryDetail = "SHORT" | "MEDIUM" | "DEEP_DIVE"
-export type ExportFormat = "pdf" | "docx"
-
-export type Presentation = {
-  id: string
-  fileName: string
-  summary: string | null
-  status: string
-  summaryDetail: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type UploadPresentationResponse = {
-  code: number
-  status: string
-  message: string
-  data?: {
-    presentation: Presentation
-    metadata?: {
-      tokens: number
-      durationMs: number
-      wordCount: number
-    }
-  }
-}
-
-export type GetPresentationResponse = {
-  code: number
-  status: string
-  data?: {
-    presentation: Presentation
-  }
-}
+import type {
+  ExportFormat,
+  Presentation,
+  UploadPresentationResult,
+  GetPresentationResult,
+} from "@/constants/presentation.types"
 
 export const presentationService = {
-  uploadPresentation: async (formData: FormData) => {
-    const response = await axiosInstance.post("api/presentations/v1/upload", formData, {
+  uploadPresentation: async (formData: FormData): Promise<UploadPresentationResult> => {
+    const response = await axiosInstance.post("/api/presentations/v1/upload", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     })
-    return response.data as UploadPresentationResponse
+    return response.data?.data ?? {}
   },
 
-  getPresentation: async (id: string) => {
-    const response = await axiosInstance.get(`api/presentations/v1/${id}`)
-    return response.data as GetPresentationResponse
+  getAll: async (): Promise<Presentation[]> => {
+    const response = await axiosInstance.get("/api/presentations/v1")
+    return response.data?.data?.presentations ?? []
+  },
+
+  getPresentation: async (id: string): Promise<GetPresentationResult> => {
+    const response = await axiosInstance.get(`/api/presentations/v1/${id}`)
+    return response.data?.data ?? {}
   },
 
   downloadPresentation: async (id: string, format: ExportFormat) => {
-    const response = await axiosInstance.get(`api/presentations/v1/${id}/download`, {
+    const response = await axiosInstance.get(`/api/presentations/v1/${id}/download`, {
       responseType: "blob",
       params: { format },
     })

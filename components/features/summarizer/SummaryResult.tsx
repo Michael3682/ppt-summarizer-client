@@ -4,6 +4,8 @@ import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { useEffect, useMemo, useState } from "react"
 import { useParams, useSearchParams } from "next/navigation"
+import { presentationService } from "@/services/presentation.service"
+import type { Presentation, ExportFormat } from "@/constants/presentation.types"
 import {
     Card,
     CardContent,
@@ -12,7 +14,6 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { presentationService, Presentation, ExportFormat } from "@/services/presentation.service"
 
 function getSummaryMetadata(summary: string) {
     const words = summary.trim().split(/\s+/).filter(Boolean).length
@@ -52,8 +53,8 @@ export default function SummaryResult() {
 
         const loadPresentation = async () => {
             try {
-                const response = await presentationService.getPresentation(presentationId)
-                setPresentation(response.data?.presentation ?? null)
+                const res = await presentationService.getPresentation(presentationId)
+                setPresentation(res.presentation ?? null)
             } catch (error) {
                 console.error(error)
                 toast.error("Unable to load summary result.")
