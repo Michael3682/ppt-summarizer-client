@@ -7,13 +7,14 @@ import { useAuth } from "@/context/AuthContext"
 import { Button } from "@/components/ui/button"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import type { SignupFormData } from "@/constants/auth.types"
+import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
-import { Card, CardContent, CardFooter } from "@/components/ui/card"
 
 const signupSchema = z.object({
   name: z
@@ -27,7 +28,6 @@ const signupSchema = z.object({
     .regex(/[0-9]/, "Password must contain at least one number"),
 })
 
-type SignupFormData = z.infer<typeof signupSchema>
 
 export default function SignupForm() {
   const { signup } = useAuth()
