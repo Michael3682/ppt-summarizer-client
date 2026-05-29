@@ -24,7 +24,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
     >
-      <body>
+      <body className="flex flex-col min-h-screen position-relative">
         <ThemeProvider>
           <AuthProvider>
             { children }
