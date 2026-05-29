@@ -1,6 +1,11 @@
 import { z } from "zod"
 import axiosInstance from "@/lib/axios"
-import type { LoginFormData, SignupFormData } from "@/constants/auth.types"
+import type {
+  LoginFormData,
+  SignupFormData,
+  UpdateProfileData,
+  ChangePasswordData,
+} from "@/constants/auth.types"
 
 export const loginSchema = z.object({
         email: z.email("Invalid email address"),
@@ -39,6 +44,14 @@ export const authService = {
     },
     verifyEmail: async (token: string) => {
         const response = await axiosInstance.get(`api/auth/v1/verify-email?token=${token}`)
+        return response.data
+    },
+    updateProfile: async (data: UpdateProfileData) => {
+        const response = await axiosInstance.patch("api/auth/v1/me", data)
+        return response.data
+    },
+    changePassword: async (data: ChangePasswordData) => {
+        const response = await axiosInstance.patch("api/auth/v1/change-password", data)
         return response.data
     },
     getMe: async () => {

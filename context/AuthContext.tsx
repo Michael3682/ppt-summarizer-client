@@ -3,10 +3,9 @@
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
 import React, { createContext, useContext, useState, useEffect } from "react"
+import { LoginFormData, SignupFormData } from "@/constants/auth.types"
 import {
   authService,
-  LoginFormData,
-  SignupFormData,
 } from "@/services/auth.service"
 
 interface User {
@@ -21,6 +20,7 @@ interface AuthContextType {
   login: (data: LoginFormData) => Promise<void>
   signup: (data: SignupFormData) => Promise<void>
   logout: () => Promise<void>
+  updateUser: (update: Partial<User>) => void
   isAuthenticated: boolean
 }
 
@@ -110,6 +110,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       router.push("/login")
     }
   }
+
+  const updateUser = (update: Partial<User>) => {
+    setUser((current) => {
+      const nextUser = current ? { ...current, ...update } : current
+      if (nextUser) {
+        localStorage.setItem("user", JSON.stringify(nextUser))
+      }
+      return nextUser
+    })
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -118,6 +129,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         signup,
         logout,
+        updateUser,
         isAuthenticated: !!user,
       }}
     >
