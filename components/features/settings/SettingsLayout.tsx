@@ -93,7 +93,7 @@ export default function SettingsLayout() {
   }
 
   return (
-    <main className="mx-auto max-w-screen-2xl px-4 py-10 sm:px-6 lg:px-8">
+    <main className="flex-grow mx-auto max-w-screen-2xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="space-y-6">
         <div className="space-y-1">
           <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground">

@@ -3,10 +3,8 @@
 import Link from "next/link"
 import { Eye, Download } from "lucide-react"
 import { Input } from "@/components/ui/input"
-import Header from "@/components/common/Header"
 import { Button } from "@/components/ui/button"
 import { useEffect, useMemo, useState } from "react"
-import AuthGuard from "@/components/features/auth/AuthGuard"
 import type { Presentation } from "@/constants/presentation.types"
 import { presentationService } from "@/services/presentation.service"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
@@ -87,9 +85,7 @@ export default function HistoryList() {
   }
 
   return (
-    <AuthGuard>
-      <main className="min-h-screen">
-        <Header />
+      <main className="flex-grow">
         <div className="px-50 py-6">
           <div className="flex items-center justify-between mb-6">
             <div>
@@ -175,6 +171,5 @@ export default function HistoryList() {
           </Link>
         </div>
       </main>
-    </AuthGuard>
   )
 }
