@@ -1,10 +1,10 @@
 "use client"
 
 import { toast } from "sonner"
+import ReactMarkdown from "react-markdown"
 import { Button } from "@/components/ui/button"
 import { useEffect, useMemo, useState } from "react"
 import { useParams, useSearchParams } from "next/navigation"
-import ReactMarkdown from "react-markdown"
 import { presentationService } from "@/services/presentation.service"
 import type { Presentation, ExportFormat } from "@/constants/presentation.types"
 import {
@@ -18,10 +18,10 @@ import {
 
 const markdownComponents = {
     p: ({ node, ...props }: any) => (
-        <p className="m-0 text-sm leading-7 text-foreground" {...props} />
+        <p className="m-0 text-xs sm:text-sm leading-5 sm:leading-7 text-foreground" {...props} />
     ),
     strong: ({ node, ...props }: any) => (
-        <strong className="font-semibold text-foreground" {...props} />
+        <strong className="text-sm sm:text-base font-medium text-foreground" {...props} />
     ),
     em: ({ node, ...props }: any) => (
         <em className="not-italic text-foreground" {...props} />
@@ -33,16 +33,16 @@ const markdownComponents = {
         <ol className="ml-5 list-decimal space-y-2 text-sm leading-7 text-foreground" {...props} />
     ),
     li: ({ node, ...props }: any) => (
-        <li className="text-sm leading-7 text-foreground" {...props} />
+        <li className="text-xs sm:text-sm leading-5 sm:leading-7 text-foreground" {...props} />
     ),
     h1: ({ node, ...props }: any) => (
         <h1 className="text-2xl font-semibold text-foreground" {...props} />
     ),
     h2: ({ node, ...props }: any) => (
-        <h2 className="text-xl font-semibold text-foreground" {...props} />
+        <h2 className="text-base sm:text-xl font-semibold text-foreground" {...props} />
     ),
     h3: ({ node, ...props }: any) => (
-        <h3 className="text-lg font-semibold text-foreground" {...props} />
+        <h3 className="text-sm sm:text-lg font-medium text-foreground" {...props} />
     ),
 }
 
@@ -174,38 +174,38 @@ export default function SummaryResult() {
                         Back to summarizer
                     </a>
 
-                    <div className="rounded-[32px] border border-border bg-card p-8 shadow-sm sm:p-10">
+                    <div className="rounded-xl border border-border bg-card p-5 shadow-sm sm:p-10">
                         <div className="grid gap-8 xl:grid-cols-[2.4fr_1fr] xl:items-end">
                             <div className="space-y-5">
-                                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">Summary Results</p>
-                                <h1 className="text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                                <p className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">Summary Results</p>
+                                <h1 className="text-xl sm:text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                                     Your presentation summary is ready.
                                 </h1>
-                                <p className="text-sm leading-7 text-muted-foreground sm:text-base">
+                                <p className="text-xs sm:text-sm leading-5 sm:leading-7 text-muted-foreground">
                                     Generated key insights, export-ready files, and metrics tailored to your deck.
                                 </p>
                             </div>
 
-                            <div className="rounded-[28px] border border-border bg-background p-6 text-sm text-muted-foreground shadow-xs">
+                            <div className="rounded-xl border border-border bg-background p-6 text-sm text-muted-foreground shadow-xs">
                                 <div className="space-y-5">
                                     <div>
-                                        <p className="text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">
+                                        <p className="text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
                                             Selected file
                                         </p>
-                                        <p className="mt-3 text-base font-semibold text-foreground">{presentation.fileName}</p>
+                                        <p className="mt-3 text-sm sm:text-base font-semibold text-foreground">{presentation.fileName}</p>
                                     </div>
                                     <div className="grid gap-3 sm:grid-cols-2">
-                                        <div className="rounded-3xl bg-muted p-4">
-                                            <p className="text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">
+                                        <div className="rounded-xl bg-muted p-4">
+                                            <p className="text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
                                                 Status
                                             </p>
-                                            <p className="mt-2 text-sm font-semibold text-foreground">{presentation.status}</p>
+                                            <p className="mt-2 text-xs sm:text-sm font-semibold text-foreground">{presentation.status}</p>
                                         </div>
-                                        <div className="rounded-3xl bg-muted p-4">
-                                            <p className="text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">
+                                        <div className="rounded-xl bg-muted p-4">
+                                            <p className="text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
                                                 Detail level
                                             </p>
-                                            <p className="mt-2 text-sm font-semibold text-foreground">{presentation.summaryDetail}</p>
+                                            <p className="mt-2 text-xs sm:text-sm font-semibold text-foreground">{presentation.summaryDetail}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -215,30 +215,32 @@ export default function SummaryResult() {
                 </div>
 
                 <div className="grid gap-8 xl:grid-cols-[2.5fr_1fr]">
-                    <Card className="h-full w-full rounded-[32px] p-8 sm:p-10">
-                        <CardHeader className="space-y-4">
+                    <Card className="h-full w-full rounded-xl p-5 sm:p-10">
+                        <CardHeader className="space-y-4 p-0">
                             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                                 <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-tertiary/10 text-tertiary">
                                     <span className="text-lg font-semibold">✓</span>
                                 </div>
-                                <div>
+                                <div className="space-y-3">
                                     <CardTitle>Key Highlights</CardTitle>
-                                    <CardDescription>Captured from your deck and surfaced as executive insights.</CardDescription>
+                                    <CardDescription className="text-xs sm:text-sm">
+                                        Captured from your deck and surfaced as executive insights.
+                                    </CardDescription>
                                 </div>
                             </div>
                         </CardHeader>
-                        <CardContent className="space-y-8">
+                        <CardContent className="space-y-8 p-0">
                             <div className="grid gap-4 sm:grid-cols-2">
                                 {highlights.map((item, index) => (
                                     <div
                                         key={index}
-                                        className="flex h-full min-h-[190px] flex-col justify-between rounded-[28px] border border-border bg-background p-6"
+                                        className="flex h-full min-h-[190px] flex-col justify-between rounded-xl border border-border bg-background p-6"
                                     >
                                         <div>
-                                            <p className="text-xs uppercase tracking-[0.3em] text-tertiary-foreground">
+                                            <p className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-tertiary-foreground">
                                                 {`0${index + 1}`}
                                             </p>
-                                            <div className="mt-3">
+                                            <div className="mt-3 space-y-2">
                                                 <ReactMarkdown components={markdownComponents}>
                                                     {item}
                                                 </ReactMarkdown>
@@ -248,10 +250,10 @@ export default function SummaryResult() {
                                 ))}
                             </div>
 
-                            <div className="rounded-[28px] border border-border bg-muted p-6">
+                            <div className="rounded-xl border border-border bg-muted p-6">
                                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                                    <p className="text-sm uppercase tracking-[0.2em] text-tertiary">Full summary</p>
-                                    <span className="inline-flex rounded-full border border-ring bg-background px-3 py-1 text-xs uppercase text-muted-foreground">
+                                    <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-tertiary">Full summary</p>
+                                    <span className="inline-flex rounded-full border border-ring bg-background px-3 py-1 text-[10px] sm:text-xs uppercase text-muted-foreground">
                                         {metadata?.readingTime} read
                                     </span>
                                 </div>
@@ -269,7 +271,7 @@ export default function SummaryResult() {
                                 <Button
                                     type="button"
                                     size="lg"
-                                    className="w-full cursor-pointer bg-tertiary text-white hover:bg-tertiary-foreground sm:w-auto"
+                                    className="text-sm sm:text-base w-full cursor-pointer bg-tertiary text-white hover:bg-tertiary-foreground sm:w-auto"
                                     disabled={isDownloading}
                                     onClick={() => handleDownload("pdf")}
                                 >
@@ -278,43 +280,43 @@ export default function SummaryResult() {
                                 <Button
                                     type="button"
                                     size="lg"
-                                    className="w-full cursor-pointer bg-transparent border border-tertiary text-primary hover:bg-tertiary hover:text-white sm:w-auto"
+                                    className="text-sm sm:text-base w-full cursor-pointer bg-transparent border border-tertiary text-primary hover:bg-tertiary hover:text-white sm:w-auto"
                                     disabled={isDownloading}
                                     onClick={() => handleDownload("docx")}
                                 >
                                     {"[ Download DOCX ]"}
                                 </Button>
                             </div>
-                            <div className="rounded-3xl bg-background px-4 py-3 text-sm text-muted-foreground">
+                            <div className="rounded-3xl bg-background px-4 py-3 text-xs sm:text-sm text-muted-foreground">
                                 Generated by AI Summarizer Pro with a precision-driven summary engine.
                             </div>
                         </CardFooter>
                     </Card>
 
-                    <Card className="h-full w-full rounded-[32px] p-8 sm:p-10">
-                        <CardHeader>
+                    <Card className="h-full w-full rounded-xl p-5 sm:p-10">
+                        <CardHeader className="p-0">
                             <CardTitle>Metadata</CardTitle>
                             <CardDescription>Summary metrics and output details.</CardDescription>
                         </CardHeader>
-                        <CardContent className="space-y-5">
+                        <CardContent className="space-y-5 p-0">
                             <div className="grid gap-4">
-                                <div className="rounded-[24px] border border-border bg-background p-5">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground">Word Count</p>
-                                    <p className="mt-3 text-3xl font-semibold text-foreground">{metadata?.wordCount ?? "-"}</p>
+                                <div className="rounded-xl border border-border bg-background p-5">
+                                    <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Word Count</p>
+                                    <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{metadata?.wordCount ?? "-"}</p>
                                 </div>
                                 <div className="grid gap-4 sm:grid-cols-2">
-                                    <div className="rounded-[24px] border border-border bg-background p-5">
-                                        <p className="text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground">Sentences</p>
-                                        <p className="mt-3 text-2xl font-semibold text-foreground">{metadata?.sentenceCount ?? "-"}</p>
+                                    <div className="rounded-xl border border-border bg-background p-5">
+                                        <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Sentences</p>
+                                        <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{metadata?.sentenceCount ?? "-"}</p>
                                     </div>
-                                    <div className="rounded-[24px] border border-border bg-background p-5">
-                                        <p className="text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground">Reading Time</p>
-                                        <p className="mt-3 text-2xl font-semibold text-foreground">{metadata?.readingTime ?? "-"}</p>
+                                    <div className="rounded-xl border border-border bg-background p-5">
+                                        <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Reading Time</p>
+                                        <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{metadata?.readingTime ?? "-"}</p>
                                     </div>
                                 </div>
-                                <div className="rounded-[24px] border border-border bg-background p-5">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground">Detail Level</p>
-                                    <p className="mt-3 text-2xl font-semibold text-foreground">{presentation.summaryDetail}</p>
+                                <div className="rounded-xl border border-border bg-background p-5">
+                                    <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Detail Level</p>
+                                    <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{presentation.summaryDetail}</p>
                                 </div>
                             </div>
                         </CardContent>

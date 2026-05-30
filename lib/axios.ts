@@ -46,7 +46,7 @@ axiosInstance.interceptors.response.use(
 
       try {
         // Attempt to refresh the token using the same base URL as the instance
-        const refreshUrl = `${axiosInstance.defaults.baseURL}/api/auth/v1/refresh-token`
+        const refreshUrl = `${axiosInstance.defaults.baseURL?.replace(/\/$/, "")}/api/auth/v1/refresh-token`
         await axios.post(refreshUrl, {}, { withCredentials: true })
 
         processQueue(null)

@@ -57,67 +57,67 @@ export default function GenerateSummary() {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center gap-10 p-15 max-w-5xl mx-auto">
-            <h1 className="font-medium text-xl">Welcome back, {user?.name}! Ready to condense your presentation deck into key highlights?</h1>
+        <div className="flex flex-col justify-center items-center gap-10 max-w-5xl mx-auto">
+            <h1 className="font-medium text-xs sm:text-xl text-center">Welcome back, {user?.name}! Ready to condense your presentation deck into key highlights?</h1>
             <div className="w-full space-y-3">
                 <FileUpload selectedFile={selectedFile} onFileSelect={setSelectedFile} />
-                <p className="text-center text-muted-foreground text-sm">{"(Supports: .pptx)"}</p>
+                <p className="text-center text-muted-foreground text-xs sm:text-sm">{"(Supports: .pptx)"}</p>
             </div>
             <div className="flex flex-col w-full border border-ring bg-sidebar rounded-lg p-7 gap-5">
-                <p className="text-tertiary">AI CONFIGURATIONS:</p>
+                <p className="text-sm sm:text-base text-tertiary">AI CONFIGURATIONS:</p>
                 <FieldGroup className="w-full flex-row justify-center">
                     <FieldSet className="w-full">
-                        <FieldLegend className="w-max">Summary Detail:</FieldLegend>
+                        <FieldLegend className="text-sm sm:text-base w-max">Summary Detail:</FieldLegend>
                         <FieldGroup className="gap-4 text-muted-foreground">
                             <Field orientation="horizontal">
                                 <Checkbox
-                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring"
                                     id="short"
                                     checked={summaryDetail === "SHORT"}
                                     onCheckedChange={(value) => value && setSummaryDetail("SHORT")}
                                 />
-                                <FieldLabel htmlFor="short">Short</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-base" htmlFor="short">Short</FieldLabel>
                             </Field>
                             <Field orientation="horizontal">
                                 <Checkbox
-                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring"
                                     id="medium"
                                     checked={summaryDetail === "MEDIUM"}
                                     onCheckedChange={(value) => value && setSummaryDetail("MEDIUM")}
                                 />
-                                <FieldLabel htmlFor="medium">Medium</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-base" htmlFor="medium">Medium</FieldLabel>
                             </Field>
                             <Field orientation="horizontal">
                                 <Checkbox
-                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring"
                                     id="deep_dive"
                                     checked={summaryDetail === "DEEP_DIVE"}
                                     onCheckedChange={(value) => value && setSummaryDetail("DEEP_DIVE")}
                                 />
-                                <FieldLabel htmlFor="deep_dive">Deep Dive</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-base" htmlFor="deep_dive">Deep Dive</FieldLabel>
                             </Field>
                         </FieldGroup>
                     </FieldSet>
                     <FieldSet className="w-full">
-                        <FieldLegend className="w-max">Export Format:</FieldLegend>
+                        <FieldLegend className="text-sm sm:text-base w-max">Export Format:</FieldLegend>
                         <FieldGroup className="gap-4 text-muted-foreground">
                             <Field className="w-max" orientation="horizontal">
                                 <Checkbox
-                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring"
                                     id="docs"
                                     checked={exportFormat === "docx"}
                                     onCheckedChange={(value) => value && setExportFormat("docx")}
                                 />
-                                <FieldLabel htmlFor="docs">Word Document {"(.docx)"}</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-base" htmlFor="docs">Word Document {"(.docx)"}</FieldLabel>
                             </Field>
-                            <Field className="w-max" orientation="horizontal">
+                            <Field className="w-full" orientation="horizontal">
                                 <Checkbox
-                                    className="bg-background rounded-full h-5 w-5 border-ring"
+                                    className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring break-words"
                                     id="ppt"
                                     checked={exportFormat === "pdf"}
                                     onCheckedChange={(value) => value && setExportFormat("pdf")}
                                 />
-                                <FieldLabel htmlFor="ppt">PowerPoint Presentation {"(.pptx)"}</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-base" htmlFor="ppt">PowerPoint Presentation {"(.pptx)"}</FieldLabel>
                             </Field>
                         </FieldGroup>
                     </FieldSet>
@@ -126,7 +126,7 @@ export default function GenerateSummary() {
             <Button
                 type="button"
                 disabled={!selectedFile || isLoading}
-                className="text-2xl p-7 bg-tertiary hover:bg-tertiary-foreground text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
+                className=" sm:text-2xl p-5 sm:p-7 bg-tertiary hover:bg-tertiary-foreground text-white cursor-pointer disabled:cursor-not-allowed disabled:opacity-60"
                 onClick={handleGenerateSummary}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-sparkle-icon lucide-sparkle">

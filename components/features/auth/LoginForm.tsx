@@ -51,9 +51,10 @@ export default function LoginForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="email">Email</FieldLabel>
+                  <FieldLabel className="text-sm sm:text-base" htmlFor="email">Email</FieldLabel>
                   <Input
                     {...field}
+                    className="text-xs sm:text-sm"
                     id="email"
                     type="email"
                     placeholder="johndoe@example.com"
@@ -71,9 +72,10 @@ export default function LoginForm() {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <FieldLabel className="text-sm sm:text-base" htmlFor="password">Password</FieldLabel>
                   <Input
                     {...field}
+                    className="text-xs sm:text-sm"
                     id="password"
                     type="password"
                     placeholder="••••••••"
@@ -93,12 +95,12 @@ export default function LoginForm() {
         <Button
           type="submit"
           form="login-form"
-          className="w-full cursor-pointer bg-tertiary text-white hover:bg-tertiary-foreground dark:text-white"
+          className="w-full text-xs sm:text-base sm:py-5 cursor-pointer bg-tertiary text-white hover:bg-tertiary-foreground dark:text-white"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "Logging in..." : "[ Log In ]"}
         </Button>
-        <p className="text-center text-sm text-muted-foreground">
+        <p className="text-center text-xs sm:text-sm text-muted-foreground">
           Don&apos;t have an account?{" "}
           <Link
             href="/signup"

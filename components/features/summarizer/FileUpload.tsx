@@ -3,6 +3,7 @@
 import { useRef, useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { useIsMobile } from "@/hooks/useIsMobile"
 
 type FileUploadProps = {
     selectedFile: File | null
@@ -10,6 +11,7 @@ type FileUploadProps = {
 }
 
 export default function FileUpload({ selectedFile, onFileSelect }: FileUploadProps) {
+    const isMobile = useIsMobile()
     const inputRef = useRef<HTMLInputElement>(null)
     const [isDragging, setIsDragging] = useState(false)
 
@@ -43,14 +45,14 @@ export default function FileUpload({ selectedFile, onFileSelect }: FileUploadPro
                 }`}
         >
             <div className="flex items-center justify-center w-14 h-14 rounded-full bg-secondary">
-                <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+                <svg width={isMobile ? "25" : "28"} height={isMobile ? "25" : "28"} viewBox="0 0 48 48" fill="none">
                     <path d="M42 23.0001C42.0069 25.6398 41.3901 28.2438 40.2 30.6001C37.3219 36.3587 31.4378 39.9976 25 40.0001C22.3603 40.0069 19.7562 39.3902 17.4 38.2001L6 42.0001L9.8 30.6001C8.60986 28.2438 7.99312 25.6398 8 23.0001C8.00249 16.5622 11.6413 10.6781 17.4 7.80006C19.7562 6.60992 22.3603 5.99317 25 6.00006H26" stroke="var(--tertiary)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M32 6H42V16" stroke="var(--tertiary)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                     <path d="M26 22L42 6" stroke="var(--tertiary)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             </div>
-            <p className="text-foreground">Drag & Drop your PowerPoint file here</p>
-            <p className="text-muted-foreground text-sm">or</p>
+            <p className="text-xs sm:text-base text-foreground">Drag & Drop your PowerPoint file here</p>
+            <p className="text-muted-foreground text-xs sm:text-sm">or</p>
             <Input
                 ref={inputRef}
                 type="file"
@@ -60,13 +62,13 @@ export default function FileUpload({ selectedFile, onFileSelect }: FileUploadPro
             />
             <Button
                 type="button"
-                className="bg-tertiary text-white hover:bg-tertiary-foreground cursor-pointer"
+                className="text-xs sm:text-base bg-tertiary text-white hover:bg-tertiary-foreground cursor-pointer"
                 onClick={() => inputRef.current?.click()}
             >
                 Browse Files
             </Button>
             {selectedFile ? (
-                <div className="rounded-md border border-border bg-muted px-4 py-3 text-sm text-foreground">
+                <div className="rounded-md border border-border bg-muted px-4 py-3 text-xs sm:text-sm text-foreground">
                     Selected file: <strong>{selectedFile.name}</strong>
                 </div>
             ) : null}

@@ -96,10 +96,10 @@ export default function SettingsLayout() {
     <main className="flex-grow mx-auto max-w-screen-2xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="space-y-6">
         <div className="space-y-1">
-          <p className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground">
             Account Settings
           </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground">
+          <h1 className="text-xl sm:text-3xl font-semibold tracking-tight text-foreground">
             Manage your profile and security settings
           </h1>
         </div>
@@ -124,10 +124,10 @@ export default function SettingsLayout() {
         </div>
 
         <div className="flex justify-end gap-3">
-          <Button className="border border-tertiary bg-transparent text-primary hover:bg-tertiary hover:text-white cursor-pointer" onClick={handleDiscard} disabled={isSaving}>
+          <Button className="text-xs sm:text-base border border-tertiary bg-transparent text-primary hover:bg-tertiary hover:text-white cursor-pointer" onClick={handleDiscard} disabled={isSaving}>
             Discard Changes
           </Button>
-          <Button className="cursor-pointer bg-tertiary text-white hover:bg-tertiary-foreground" onClick={handleSave} disabled={isSaving}>
+          <Button className="text-xs sm:text-base cursor-pointer bg-tertiary text-white hover:bg-tertiary-foreground" onClick={handleSave} disabled={isSaving}>
             {isSaving ? "Saving..." : "Save Changes"}
           </Button>
         </div>
