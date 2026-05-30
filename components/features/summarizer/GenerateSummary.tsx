@@ -101,7 +101,7 @@ export default function GenerateSummary() {
                     <FieldSet className="w-full">
                         <FieldLegend className="text-sm sm:text-base w-max">Export Format:</FieldLegend>
                         <FieldGroup className="gap-4 text-muted-foreground">
-                            <Field className="w-max" orientation="horizontal">
+                            <Field className="w-full" orientation="horizontal">
                                 <Checkbox
                                     className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring break-words"
                                     id="docs"
