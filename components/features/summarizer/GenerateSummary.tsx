@@ -103,7 +103,7 @@ export default function GenerateSummary() {
                         <FieldGroup className="gap-4 text-muted-foreground">
                             <Field className="w-max" orientation="horizontal">
                                 <Checkbox
-                                    className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring"
+                                    className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring break-words"
                                     id="docs"
                                     checked={exportFormat === "docx"}
                                     onCheckedChange={(value) => value && setExportFormat("docx")}
