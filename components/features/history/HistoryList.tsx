@@ -127,7 +127,7 @@ export default function HistoryList() {
 
   return (
     <main className="flex-grow">
-      <div className="p-4 sm:px-50 py-6">
+      <div className="p-4 sm:px-30 py-6">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h1 className="text-xl sm:text-3xl font-bold">History</h1>
@@ -165,21 +165,21 @@ export default function HistoryList() {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="text-sm text-muted-foreground border-b">
-                      <th className="py-3">File Name</th>
-                      <th className="py-3">Date Summarized</th>
-                      <th className="py-3">Actions</th>
+                      <th className="py-3 pr-5">File Name</th>
+                      <th className="py-3 pr-5">Date Summarized</th>
+                      <th className="py-3 pr-5 w-fit">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {pageItems.map((p) => (
                       <tr key={p.id} className="border-b hover:bg-muted">
-                        <td className="py-3">
+                        <td className="py-3 pr-5">
                           <div className="flex items-center gap-3">
-                            <div className="text-xs sm:text-base truncate font-medium max-w-[100px] sm:max-w-full">{p.fileName}</div>
+                            <div className="text-xs sm:text-base truncate font-medium min-w-full max-w-[120px] lg:max-w-full">{p.fileName}</div>
                           </div>
                         </td>
-                        <td className="text-xs sm:text-base py-3">{formatDate(p.createdAt)}</td>
-                        <td className="py-3">
+                        <td className="text-xs sm:text-base py-3 pr-5">{formatDate(p.createdAt)}</td>
+                        <td className="py-3 pr-5">
                           {isMobile ? (
                             <div className="flex justify-end">
                               <button
@@ -205,7 +205,7 @@ export default function HistoryList() {
                           ) : (
                             <div className="flex flex-col sm:flex-row gap-2">
                               <Link href={`/results/${p.id}`}>
-                                <Button className="w-full text-[10px] bg-tertiary text-white hover:bg-tertiary-foreground cursor-pointer">
+                                <Button className="w-full text-[10px] bg-tertiary-foreground text-white hover:bg-tertiary cursor-pointer">
                                   <Eye size={isMobile ? 16 : 20} /> View
                                 </Button>
                               </Link>

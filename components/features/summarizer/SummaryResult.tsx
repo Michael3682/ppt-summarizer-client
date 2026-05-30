@@ -18,7 +18,7 @@ import {
 
 const markdownComponents = {
     p: ({ node, ...props }: any) => (
-        <p className="m-0 text-xs sm:text-sm leading-5 sm:leading-7 text-foreground" {...props} />
+        <p className="m-0 text-xs sm:text-sm text-foreground" {...props} />
     ),
     strong: ({ node, ...props }: any) => (
         <strong className="text-sm sm:text-base font-medium text-foreground" {...props} />
@@ -27,13 +27,13 @@ const markdownComponents = {
         <em className="not-italic text-foreground" {...props} />
     ),
     ul: ({ node, ...props }: any) => (
-        <ul className="ml-5 list-disc space-y-2 text-sm leading-7 text-foreground" {...props} />
+        <ul className="ml-5 list-disc space-y-2 text-sm text-foreground" {...props} />
     ),
     ol: ({ node, ...props }: any) => (
-        <ol className="ml-5 list-decimal space-y-2 text-sm leading-7 text-foreground" {...props} />
+        <ol className="ml-5 list-decimal space-y-2 text-sm text-foreground" {...props} />
     ),
     li: ({ node, ...props }: any) => (
-        <li className="text-xs sm:text-sm leading-5 sm:leading-7 text-foreground" {...props} />
+        <li className="text-xs sm:text-sm text-foreground" {...props} />
     ),
     h1: ({ node, ...props }: any) => (
         <h1 className="text-2xl font-semibold text-foreground" {...props} />
@@ -163,7 +163,7 @@ export default function SummaryResult() {
     }
 
     return (
-        <div className="mx-auto w-full max-w-screen-2xl px-4 py-10 sm:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-screen-2xl py-10">
             <div className="space-y-10">
                 <div className="flex flex-col gap-4">
                     <a
@@ -175,13 +175,13 @@ export default function SummaryResult() {
                     </a>
 
                     <div className="rounded-xl border border-border bg-card p-5 shadow-sm sm:p-10">
-                        <div className="grid gap-8 xl:grid-cols-[2.4fr_1fr] xl:items-end">
+                        <div className="grid gap-8 xl:grid-cols-[2.4fr_1fr]">
                             <div className="space-y-5">
-                                <p className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">Summary Results</p>
+                                <p className="text-xs sm:text-sm uppercase text-muted-foreground">Summary Results</p>
                                 <h1 className="text-xl sm:text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                                     Your presentation summary is ready.
                                 </h1>
-                                <p className="text-xs sm:text-sm leading-5 sm:leading-7 text-muted-foreground">
+                                <p className="text-xs sm:text-sm text-muted-foreground">
                                     Generated key insights, export-ready files, and metrics tailored to your deck.
                                 </p>
                             </div>
@@ -189,20 +189,20 @@ export default function SummaryResult() {
                             <div className="rounded-xl border border-border bg-background p-6 text-sm text-muted-foreground shadow-xs">
                                 <div className="space-y-5">
                                     <div>
-                                        <p className="text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
+                                        <p className="text-[0.65rem] uppercase text-muted-foreground">
                                             Selected file
                                         </p>
                                         <p className="mt-3 text-sm sm:text-base font-semibold text-foreground">{presentation.fileName}</p>
                                     </div>
                                     <div className="grid gap-3 sm:grid-cols-2">
                                         <div className="rounded-xl bg-muted p-4">
-                                            <p className="text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
+                                            <p className="text-[0.65rem] uppercase text-muted-foreground">
                                                 Status
                                             </p>
                                             <p className="mt-2 text-xs sm:text-sm font-semibold text-foreground">{presentation.status}</p>
                                         </div>
                                         <div className="rounded-xl bg-muted p-4">
-                                            <p className="text-[0.65rem] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-muted-foreground">
+                                            <p className="text-[0.65rem] uppercase text-muted-foreground">
                                                 Detail level
                                             </p>
                                             <p className="mt-2 text-xs sm:text-sm font-semibold text-foreground">{presentation.summaryDetail}</p>
@@ -237,7 +237,7 @@ export default function SummaryResult() {
                                         className="flex h-full min-h-[190px] flex-col justify-between rounded-xl border border-border bg-background p-6"
                                     >
                                         <div>
-                                            <p className="text-xs uppercase tracking-[0.2em] sm:tracking-[0.3em] text-tertiary-foreground">
+                                            <p className="text-xs uppercase text-tertiary-foreground">
                                                 {`0${index + 1}`}
                                             </p>
                                             <div className="mt-3 space-y-2">
@@ -252,12 +252,12 @@ export default function SummaryResult() {
 
                             <div className="rounded-xl border border-border bg-muted p-6">
                                 <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                                    <p className="text-xs sm:text-sm uppercase tracking-[0.2em] sm:tracking-[0.3em] text-tertiary">Full summary</p>
+                                    <p className="text-xs sm:text-sm uppercase text-tertiary">Full summary</p>
                                     <span className="inline-flex rounded-full border border-ring bg-background px-3 py-1 text-[10px] sm:text-xs uppercase text-muted-foreground">
                                         {metadata?.readingTime} read
                                     </span>
                                 </div>
-                                <div className="mt-4 max-h-[320px] overflow-y-auto text-sm leading-7 text-foreground">
+                                <div className="mt-4 max-h-[320px] overflow-y-auto text-sm text-foreground">
                                     <div className="prose prose-invert max-w-none text-foreground">
                                         <ReactMarkdown components={markdownComponents}>
                                             {presentation.summary}
@@ -266,7 +266,7 @@ export default function SummaryResult() {
                                 </div>
                             </div>
                         </CardContent>
-                        <CardFooter className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                        <CardFooter className="flex flex-col gap-4 items-start sm:justify-between">
                             <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                                 <Button
                                     type="button"
@@ -287,7 +287,7 @@ export default function SummaryResult() {
                                     {"[ Download DOCX ]"}
                                 </Button>
                             </div>
-                            <div className="rounded-3xl bg-background px-4 py-3 text-xs sm:text-sm text-muted-foreground">
+                            <div className="text-xs sm:text-sm text-muted-foreground">
                                 Generated by AI Summarizer Pro with a precision-driven summary engine.
                             </div>
                         </CardFooter>
@@ -301,22 +301,22 @@ export default function SummaryResult() {
                         <CardContent className="space-y-5 p-0">
                             <div className="grid gap-4">
                                 <div className="rounded-xl border border-border bg-background p-5">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Word Count</p>
-                                    <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{metadata?.wordCount ?? "-"}</p>
+                                    <p className="text-[0.65rem] uppercase text-muted-foreground">Word Count</p>
+                                    <p className="mt-3 text-base sm:text-lg font-semibold text-foreground">{metadata?.wordCount ?? "-"}</p>
                                 </div>
                                 <div className="grid gap-4 sm:grid-cols-2">
                                     <div className="rounded-xl border border-border bg-background p-5">
-                                        <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Sentences</p>
-                                        <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{metadata?.sentenceCount ?? "-"}</p>
+                                        <p className="text-[0.65rem] uppercase text-muted-foreground">Sentences</p>
+                                        <p className="mt-3 text-base sm:text-lg font-semibold text-foreground">{metadata?.sentenceCount ?? "-"}</p>
                                     </div>
                                     <div className="rounded-xl border border-border bg-background p-5">
-                                        <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Reading Time</p>
-                                        <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{metadata?.readingTime ?? "-"}</p>
+                                        <p className="text-[0.65rem] uppercase text-muted-foreground">Reading Time</p>
+                                        <p className="mt-3 text-base sm:text-lg font-semibold text-foreground">{metadata?.readingTime ?? "-"}</p>
                                     </div>
                                 </div>
                                 <div className="rounded-xl border border-border bg-background p-5">
-                                    <p className="text-[0.65rem] uppercase tracking-[0.2em] md:tracking-[0.3em] text-muted-foreground">Detail Level</p>
-                                    <p className="mt-3 text-xl sm:text-2xl font-semibold text-foreground">{presentation.summaryDetail}</p>
+                                    <p className="text-[0.65rem] uppercase text-muted-foreground">Detail Level</p>
+                                    <p className="mt-3 text-base sm:text-lg font-semibold text-foreground">{presentation.summaryDetail}</p>
                                 </div>
                             </div>
                         </CardContent>

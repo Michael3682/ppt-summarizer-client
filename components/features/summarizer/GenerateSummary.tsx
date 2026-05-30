@@ -57,14 +57,14 @@ export default function GenerateSummary() {
     }
 
     return (
-        <div className="flex flex-col justify-center items-center gap-10 max-w-5xl mx-auto">
+        <div className="flex flex-col justify-center items-center gap-10 w-full">
             <h1 className="font-medium text-xs sm:text-xl text-center">Welcome back, {user?.name}! Ready to condense your presentation deck into key highlights?</h1>
             <div className="w-full space-y-3">
                 <FileUpload selectedFile={selectedFile} onFileSelect={setSelectedFile} />
                 <p className="text-center text-muted-foreground text-xs sm:text-sm">{"(Supports: .pptx)"}</p>
             </div>
             <div className="flex flex-col w-full border border-ring bg-sidebar rounded-lg p-7 gap-5">
-                <p className="text-sm sm:text-base text-tertiary">AI CONFIGURATIONS:</p>
+                <p className="text-sm sm:text-base text-tertiary font-medium">AI CONFIGURATIONS:</p>
                 <FieldGroup className="w-full flex-row justify-center">
                     <FieldSet className="w-full">
                         <FieldLegend className="text-sm sm:text-base w-max">Summary Detail:</FieldLegend>
@@ -76,7 +76,7 @@ export default function GenerateSummary() {
                                     checked={summaryDetail === "SHORT"}
                                     onCheckedChange={(value) => value && setSummaryDetail("SHORT")}
                                 />
-                                <FieldLabel className="text-xs sm:text-base" htmlFor="short">Short</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-sm" htmlFor="short">Short</FieldLabel>
                             </Field>
                             <Field orientation="horizontal">
                                 <Checkbox
@@ -85,7 +85,7 @@ export default function GenerateSummary() {
                                     checked={summaryDetail === "MEDIUM"}
                                     onCheckedChange={(value) => value && setSummaryDetail("MEDIUM")}
                                 />
-                                <FieldLabel className="text-xs sm:text-base" htmlFor="medium">Medium</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-sm" htmlFor="medium">Medium</FieldLabel>
                             </Field>
                             <Field orientation="horizontal">
                                 <Checkbox
@@ -94,7 +94,7 @@ export default function GenerateSummary() {
                                     checked={summaryDetail === "DEEP_DIVE"}
                                     onCheckedChange={(value) => value && setSummaryDetail("DEEP_DIVE")}
                                 />
-                                <FieldLabel className="text-xs sm:text-base" htmlFor="deep_dive">Deep Dive</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-sm" htmlFor="deep_dive">Deep Dive</FieldLabel>
                             </Field>
                         </FieldGroup>
                     </FieldSet>
@@ -108,7 +108,7 @@ export default function GenerateSummary() {
                                     checked={exportFormat === "docx"}
                                     onCheckedChange={(value) => value && setExportFormat("docx")}
                                 />
-                                <FieldLabel className="text-xs sm:text-base" htmlFor="docs">Word Document {"(.docx)"}</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-sm" htmlFor="docs">Word Document {"(.docx)"}</FieldLabel>
                             </Field>
                             <Field className="w-full" orientation="horizontal">
                                 <Checkbox
@@ -117,7 +117,7 @@ export default function GenerateSummary() {
                                     checked={exportFormat === "pdf"}
                                     onCheckedChange={(value) => value && setExportFormat("pdf")}
                                 />
-                                <FieldLabel className="text-xs sm:text-base" htmlFor="ppt">PowerPoint Presentation {"(.pptx)"}</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-sm" htmlFor="ppt">PowerPoint Presentation {"(.pptx)"}</FieldLabel>
                             </Field>
                         </FieldGroup>
                     </FieldSet>

@@ -7,7 +7,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <AuthGuard>
             <main className="flex flex-col min-h-screen position-relative">
                 <Header />
-                <div className="px-4 py-4 sm:px-50 sm:py-6 flex-grow">
+                <div className="px-4 py-4 sm:px-30 sm:py-6 flex-grow">
                     {children}
                 </div>
                 <Footer />

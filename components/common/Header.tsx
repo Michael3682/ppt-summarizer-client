@@ -1,11 +1,11 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 import Logo from "@/components/common/Logo"
 import { usePathname } from "next/navigation"
-import LogoutButton from "@/components/features/auth/LogoutButton"
 import { useIsMobile } from "@/hooks/useIsMobile"
-import { useState } from "react"
+import LogoutButton from "@/components/features/auth/LogoutButton"
 
 const navLinks = [
     { href: "/", label: "Summarizer" },
@@ -19,11 +19,11 @@ export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     return (
-        <header className="sticky top-0 z-50 w-full h-16 flex items-center justify-between px-4 sm:px-50 border-b border-ring-foreground bg-background backdrop-blur-sm">
-            <div className="flex justify-center items-center gap-2">
-                <Logo size={isMobile ? 20 : 40} />
-                <p className="sm:text-2xl font-extrabold text-tertiary">AI Summarizer Pro</p>
-            </div>
+        <header className="sticky top-0 z-50 w-full h-16 flex items-center justify-between px-4 sm:px-30 border-b border-ring-foreground bg-background backdrop-blur-sm">
+            <Link className="flex justify-center items-center gap-2" href="/">
+                <Logo size={isMobile ? 20 : 30} />
+                <p className="text-lg sm:text-xl font-extrabold text-tertiary">AI Summarizer Pro</p>
+            </Link>
 
             {isMobile ? (
                 <div className="relative">

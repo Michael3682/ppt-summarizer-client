@@ -9,7 +9,7 @@ export default function LogoutButton() {
     return (
         <Button
             variant="outline"
-            className="text-xs sm:text-base cursor-pointer"
+            className="text-xs sm:text-sm cursor-pointer"
             onClick={logout}
         >
             Log Out
