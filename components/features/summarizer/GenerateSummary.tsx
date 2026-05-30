@@ -113,11 +113,11 @@ export default function GenerateSummary() {
                             <Field className="w-full" orientation="horizontal">
                                 <Checkbox
                                     className="bg-background rounded-full h-4 w-4 sm:h-5 sm:w-5 border-ring break-words"
-                                    id="ppt"
+                                    id="pdf"
                                     checked={exportFormat === "pdf"}
                                     onCheckedChange={(value) => value && setExportFormat("pdf")}
                                 />
-                                <FieldLabel className="text-xs sm:text-sm" htmlFor="ppt">PowerPoint Presentation {"(.pptx)"}</FieldLabel>
+                                <FieldLabel className="text-xs sm:text-sm" htmlFor="pdf">Portable Document Format {"(.pdf)"}</FieldLabel>
                             </Field>
                         </FieldGroup>
                     </FieldSet>
